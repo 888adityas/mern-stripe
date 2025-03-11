@@ -7,6 +7,7 @@ import {
   decreaseQuantity,
 } from "../features/cart/cartSlice";
 import { useNavigate } from "react-router";
+import { loadStripe } from "@stripe/stripe-js";
 
 const CartDrawer = () => {
   const dispatch = useDispatch();
@@ -18,10 +19,31 @@ const CartDrawer = () => {
     0
   );
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     dispatch(toggleCart());
     console.log("cart-items:", items);
-    navigate("/checkout");
+    const stripe = await loadStripe(
+      "sk_test_51R1W7B2EJ5gYJt8V1L0Ix6fC0mPBrj0UR1x1LcIGzsGWw9Va38EbEpXwzkFOK4Rj7zAz8zmKzNLlQfN9fqi2wqEK00v7JnDmUR"
+    );
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const response = await fetch(
+      "http://localhost:4000/api/create-checkout-session",
+      {
+        method: "POST",
+        headers,
+        body: JSON.stringify({ items }),
+      }
+    );
+    const session = await response.json();
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+    if (result.error) {
+      console.log(result.error);
+    }
+    // navigate("/checkout");
   };
 
   if (!isOpen) return null;

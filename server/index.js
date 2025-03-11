@@ -27,6 +27,7 @@ mongoose
 // Routes
 app.use("/api/products", productRoutes);
 app.use("/api/makeorder", orderRoutes);
+app.use("/api/create-checkout-session");
 
 // Error handling middleware
 app.use(errorHandler);
