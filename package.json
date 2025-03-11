@@ -1,0 +1,20 @@
+{
+  "name": "mern-stripe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "This is a MERN stack e-commerce web application built using React, Tailwind CSS, and React Router. The application provides a seamless shopping experience with features such as product display, cart functionality, and a responsive design.",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server": "npm start --prefix server",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm run build --prefix client"
+  },
+  "dependencies": {
+    "concurrently": "^6.0.0"
+  },
+  "devDependencies": {}
+}
