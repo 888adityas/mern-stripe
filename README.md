@@ -78,7 +78,7 @@ mern-ecommerce
    npm start
    ```
 
-The application should now be running on `http://localhost:3000`.
+
 
 ## Contributing
 
